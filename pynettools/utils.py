@@ -31,7 +31,7 @@ def port_open(ip=None, port=None, timeout=2):
 			logger.debug(f"{name}: Failure!")
 		return result == 0
 	except:
-		logger.error(f"{name}: Error!")
+		logger.exception(f"{name}: Error!")
 		return False
 
 def execute(command):
