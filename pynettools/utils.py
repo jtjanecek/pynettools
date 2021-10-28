@@ -17,23 +17,26 @@ def port_open(ip=None, port=None, timeout=2):
 	assert ip != None
 	assert port != None
 
-	logger.debug(f"Checking port_open on: {ip}: {port} ...")
+	name = f'port_open({ip},{port})'
+
+	logger.debug(f"{name}: Checking port_open on: {ip}: {port} ...")
 	try:
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		sock.settimeout(timeout) 
 		result = sock.connect_ex((ip,port))
 		if result == 0:
-			logger.debug("Success!")
+			logger.debug("{name}: Success!")
 		else:
-			logger.debug("Failure!")
+			logger.debug("{name}: Failure!")
 		return result == 0
 	except:
 		return False
 
 def execute(command):
-	logger.debug(f"Executing: {command}")
+	name = f'execute({command})'
+	logger.debug(f"{name}: Executing: {command}")
 	out = subprocess.check_output(command,stderr=subprocess.STDOUT, shell=True)
 	out = out.decode().strip()
-	logger.debug(f"Result: {out}")
+	logger.debug(f"{name}: Result: {out}")
 	return out
 
