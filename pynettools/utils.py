@@ -48,7 +48,7 @@ def ping(host):
 	Remember that a host may not respond to a ping (ICMP) request even if the host name is valid.
 	"""
 
-	name = f'execute({command})'
+	name = f'ping({host})'
 	logger.debug(f"{name}: Pinging {host}")
 	
 	# Option for the number of packets as a function of
