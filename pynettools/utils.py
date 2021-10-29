@@ -57,3 +57,9 @@ def ping(host):
 	return subprocess.call(command) == 0
 
 
+def execute_remote(username, hostname, remote_command, rsa_private_key=None):
+	assert "'" not in remote_command
+	if rsa_private_key == None:
+		return execute(f"ssh {username}@{hostname} '{remote_command}'")
+	else:
+		return execute(f"ssh -i {rsa_private_key} {username}@{hostname} '{remote_command}'")
