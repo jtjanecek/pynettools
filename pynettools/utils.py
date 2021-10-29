@@ -48,13 +48,20 @@ def ping(host):
 	Remember that a host may not respond to a ping (ICMP) request even if the host name is valid.
 	"""
 
+	name = f'execute({command})'
+	logger.debug(f"{name}: Pinging {host}")
+	
 	# Option for the number of packets as a function of
 	param = '-n' if platform.system().lower()=='windows' else '-c'
 
 	# Building the command. Ex: "ping -c 1 google.com"
 	command = ['ping', param, '1', host]
 
-	return subprocess.call(command) == 0
+	logger.debug(f"{name}: Executing: {command}")
+	result = subprocess.call(command)
+	logger.debug(f"{name}: Result: {result}")
+
+	return result == 0
 
 
 def execute_remote(username, hostname, remote_command, rsa_private_key=None):
