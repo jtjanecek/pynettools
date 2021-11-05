@@ -67,6 +67,6 @@ def ping(host):
 def execute_remote(username, hostname, remote_command, rsa_private_key=None):
 	assert "'" not in remote_command
 	if rsa_private_key == None:
-		return execute(f"ssh {username}@{hostname} '{remote_command}'")
+		return execute(f"ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no {username}@{hostname} '{remote_command}'")
 	else:
-		return execute(f"ssh -i {rsa_private_key} {username}@{hostname} '{remote_command}'")
+		return execute(f"ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -i {rsa_private_key} {username}@{hostname} '{remote_command}'")
